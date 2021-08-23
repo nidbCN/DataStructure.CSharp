@@ -4,45 +4,61 @@ using System.Collections.Generic;
 
 namespace DataStructure
 {
-    public class LinkedList<T> : IEnumerable<T>, IList<T>
+    public class LinkedList<T> : IEnumerable<T>, ICollection<T>, ICollection
     {
-        public T this[int index] { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public int Count => _count;
+        private int _count;
 
-        public int Count => throw new NotImplementedException();
+#nullable enable
+        private DataNode<T>? _head;
+        private DataNode<T>? _tail;
+#nullable disable
 
-        public bool IsReadOnly => throw new NotImplementedException();
+        public bool IsReadOnly => false;
 
-        public void Add(T item)
-        {
-            throw new NotImplementedException();
-        }
+        public bool IsSynchronized => throw new NotImplementedException();
+
+        public object SyncRoot => throw new NotImplementedException();
+
+        /// <summary>
+        /// Insert a new node at the end of LinkedList.
+        /// </summary>
+        /// <param name="val">value</param>
+        public void Add(T val) =>
+            _head ??= (_tail = new(val, _tail));
 
         public void Clear()
         {
-            throw new NotImplementedException();
+            _head = _tail = null;
+            _count = 0;
         }
 
-        public bool Contains(T item)
+        public bool Contains(T val)
         {
-            throw new NotImplementedException();
+            for (var pointer = _head; pointer.HasNext(); pointer = pointer.Next)
+                if (pointer.Data.Equals(val))
+                    return true;
+
+            return false;
         }
 
         public void CopyTo(T[] array, int arrayIndex)
         {
-            throw new NotImplementedException();
+            var counter = 0;
+            var index = 0;
+
+            for (var pointer = _head; pointer.HasNext(); pointer = pointer.Next)
+            {
+                if (counter < arrayIndex)
+                {
+                    array[index++] = pointer.Data;
+                }
+
+                counter++;
+            }
         }
 
         public IEnumerator<T> GetEnumerator()
-        {
-            throw new NotImplementedException();
-        }
-
-        public int IndexOf(T item)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Insert(int index, T item)
         {
             throw new NotImplementedException();
         }
@@ -52,12 +68,12 @@ namespace DataStructure
             throw new NotImplementedException();
         }
 
-        public void RemoveAt(int index)
+        IEnumerator IEnumerable.GetEnumerator()
         {
             throw new NotImplementedException();
         }
 
-        IEnumerator IEnumerable.GetEnumerator()
+        public void CopyTo(Array array, int index)
         {
             throw new NotImplementedException();
         }
