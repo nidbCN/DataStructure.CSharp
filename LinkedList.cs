@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections;
 
 namespace DataStructure
 {
@@ -44,17 +42,15 @@ namespace DataStructure
 
         public void CopyTo(T[] array, int arrayIndex)
         {
-            var counter = 0;
-            var index = 0;
+            var indexOfList = 0;
+            var indexOfArray = 0;
 
             for (var pointer = _head; pointer.HasNext(); pointer = pointer.Next)
             {
-                if (counter < arrayIndex)
-                {
-                    array[index++] = pointer.Data;
-                }
+                if (indexOfList < arrayIndex)
+                    array[indexOfArray++] = pointer.Data;
 
-                counter++;
+                indexOfList++;
             }
         }
 
@@ -75,7 +71,52 @@ namespace DataStructure
 
         public void CopyTo(Array array, int index)
         {
-            throw new NotImplementedException();
+            var indexOfList = 0;
+            var indexOfArray = 0;
+
+            for (var pointer = _head; pointer.HasNext(); pointer = pointer.Next)
+            {
+                if (indexOfList < index)
+                    array.SetValue(pointer.Data, indexOfArray);
+
+                indexOfList++;
+            }
+        }
+
+        public int IndexOf(T item)
+        {
+            if (item is null) return -1;
+            if (_head is null) return -1;
+
+            var indexOfList = 0;
+
+            for (var pointer = _head; pointer.HasNext(); pointer = pointer.Next)
+            {
+                if (pointer.Data?.Equals(item) ?? false)
+                    return indexOfList;
+
+                indexOfList++;
+            }
+
+            return -1;
+        }
+
+#nullable enable
+        public T? Find(Predicate<T> match)
+#nullable restore
+        {
+            if (match is null) throw new ArgumentNullException(nameof(match));
+            if (_head is null) return default;
+
+
+            for (var pointer = _head; pointer.HasNext(); pointer = pointer.Next)
+            {
+                if (match.Invoke(pointer.Data))
+                    return pointer.Data;
+            }
+
+            return default;
         }
     }
+
 }
