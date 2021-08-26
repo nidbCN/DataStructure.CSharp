@@ -7,6 +7,7 @@ namespace DataStructure.Collections.Generic
 {
     public class LinkedList<T> : IEnumerable<T>, ICollection<T>, ICollection, IDataCollection<T>
     {
+        #region Properties
         /// <summary>
         /// The number of elements contained in the LinkedList<T>.
         /// </summary>
@@ -21,12 +22,29 @@ namespace DataStructure.Collections.Generic
         /// The last node of LinkedList.
         /// </summary>
         public DoubleNode<T>? Tail => _tail;
+        #endregion
 
-
+        #region Fields
         private int _count;
         private DoubleNode<T>? _head;
         private DoubleNode<T>? _tail;
+        #endregion
 
+        #region Methods
+        public LinkedList()
+        {
+
+        }
+
+        public LinkedList(IEnumerable<T> list)
+        {
+            if (list is null) return;
+
+            foreach (var item in list)
+            {
+                AddLast(item);
+            }
+        }
 
         public bool IsReadOnly => false;
 
@@ -177,6 +195,9 @@ namespace DataStructure.Collections.Generic
             return result;
         }
 
+        public int LastIndexOf(T item)
+            => LastIndexOf(x => EqualityComparer<T>.Default.Equals(item, x));
+
         public int LastIndexOf(Predicate<T> match)
         {
             if (match is null) throw new ArgumentNullException(nameof(match));
@@ -189,7 +210,10 @@ namespace DataStructure.Collections.Generic
 
             return result;
         }
+        #endregion
 
+
+        #region Private Methods
         private (DoubleNode<T>?, int) FindNode(Predicate<DoubleNode<T>> match)
         {
             var indexOfList = 0;
@@ -215,6 +239,7 @@ namespace DataStructure.Collections.Generic
 
             return (null, -1);
         }
+        #endregion
 
 
     }
