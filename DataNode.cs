@@ -1,8 +1,7 @@
 ﻿namespace DataStructure
 {
-    internal class DataNode<T>
+    public class DataNode<T>
     {
-#nullable enable
         /// <summary>
         /// New a DataNode with value data.
         /// </summary>
@@ -17,7 +16,7 @@
         /// </remarks>
         /// <param name="data">value</param>
         /// <param name="prev">previous node</param>
-        public DataNode(T data, DataNode<T>? prev)
+        public DataNode(T data, DataNode<T>? prev = null, DataNode<T>? next = null)
         {
             Data = data;
 
@@ -25,6 +24,12 @@
             {
                 Prev = prev;
                 prev.Next = this;
+            }
+
+            if (next is not null)
+            {
+                Next = next;
+                next.Prev = this;
             }
         }
 
