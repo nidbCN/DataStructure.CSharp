@@ -1,12 +1,12 @@
-﻿namespace DataStructure
+﻿namespace DataStructure.Models
 {
-    public class DataNode<T>
+    public class DoubleNode<T> : IDataNode<T>
     {
         /// <summary>
         /// New a DataNode with value data.
         /// </summary>
         /// <param name="data">value</param>
-        public DataNode(T data) : this(data, null) { }
+        public DoubleNode(T data) : this(data, null) { }
 
         /// <summary>
         /// New a DataNode with value data and previous node.
@@ -16,7 +16,7 @@
         /// </remarks>
         /// <param name="data">value</param>
         /// <param name="prev">previous node</param>
-        public DataNode(T data, DataNode<T>? prev = null, DataNode<T>? next = null)
+        public DoubleNode(T data, DoubleNode<T>? prev = null, DoubleNode<T>? next = null)
         {
             Data = data;
 
@@ -35,8 +35,8 @@
 
         public T Data { get; set; }
 
-        public DataNode<T>? Next { get; set; }
-        public DataNode<T>? Prev { get; set; }
+        public DoubleNode<T>? Next { get; set; }
+        public DoubleNode<T>? Prev { get; set; }
         public bool HasNext() => !(Next is null);
         public bool HasPrev() => !(Prev is null);
 

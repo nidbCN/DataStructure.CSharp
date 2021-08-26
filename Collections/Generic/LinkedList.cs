@@ -1,9 +1,11 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using DataStructure.Models;
 
-namespace DataStructure
+namespace DataStructure.Collections.Generic
 {
-
-    public class LinkedList<T> : IEnumerable<T>, ICollection<T>, ICollection
+    public class LinkedList<T> : IEnumerable<T>, ICollection<T>, ICollection, IDataCollection<T>
     {
         /// <summary>
         /// The number of elements contained in the LinkedList<T>.
@@ -13,17 +15,17 @@ namespace DataStructure
         /// <summary>
         /// The first node of LinkedList.
         /// </summary>
-        public DataNode<T>? Head => _head;
+        public DoubleNode<T>? Head => _head;
 
         /// <summary>
         /// The last node of LinkedList.
         /// </summary>
-        public DataNode<T>? Tail => _tail;
+        public DoubleNode<T>? Tail => _tail;
 
 
         private int _count;
-        private DataNode<T>? _head;
-        private DataNode<T>? _tail;
+        private DoubleNode<T>? _head;
+        private DoubleNode<T>? _tail;
 
 
         public bool IsReadOnly => false;
@@ -60,7 +62,7 @@ namespace DataStructure
             var indexOfList = 0;
             var indexOfArray = 0;
 
-            for (var pointer = _head; pointer!.HasNext(); pointer = pointer.Next)
+            for (var pointer = Head; pointer!.HasNext(); pointer = pointer.Next)
             {
                 if (indexOfList < arrayIndex)
                     array[indexOfArray++] = pointer.Data;
@@ -69,11 +71,11 @@ namespace DataStructure
             }
         }
 
-        public DataNode<T>? Find(T? item)
+        public DoubleNode<T>? Find(T? item)
             => Find(x => EqualityComparer<T>.Default.Equals(item, x));
 
 
-        public DataNode<T>? Find(Predicate<T> match)
+        public DoubleNode<T>? Find(Predicate<T> match)
         {
             if (match is null) throw new ArgumentNullException(nameof(match));
             if (_head is null) return default;
@@ -83,10 +85,10 @@ namespace DataStructure
             return result;
         }
 
-        public DataNode<T>? FindLast(T? item)
+        public DoubleNode<T>? FindLast(T? item)
             => FindLast(x => EqualityComparer<T>.Default.Equals(item, x));
 
-        public DataNode<T>? FindLast(Predicate<T> match)
+        public DoubleNode<T>? FindLast(Predicate<T> match)
         {
             if (match is null) throw new ArgumentNullException(nameof(match));
             if (_tail is null) return default;
@@ -101,11 +103,43 @@ namespace DataStructure
             throw new NotImplementedException();
         }
 
-        public bool Remove(T item)
+        public bool Remove(T? item)
+            => Remove(Find(item));
+
+        public bool Remove(DoubleNode<T>? node)
         {
+            if (node is null) return false;
 
+            if (node.HasPrev())
+            {
+                if (node.HasNext())
+                {
+                    node.Prev!.Next = node.Next;
+                    node.Next!.Prev = node.Prev;
+                }
+                else
+                {
+                    _tail = node.Prev;
+                    node.Prev!.Next = null;
+                    node.Prev = null;
+                }
+            }
+            else
+            {
+                if (node.HasNext())
+                {
+                    _head = node.Next;
+                    node.Next!.Prev = null;
+                    node.Next = null;
+                }
+                else
+                {
+                    _head = null;
+                    _tail = null;
+                }
+            }
 
-
+            return true;
         }
 
         IEnumerator IEnumerable.GetEnumerator()
@@ -118,7 +152,7 @@ namespace DataStructure
             var indexOfList = 0;
             var indexOfArray = 0;
 
-            for (var pointer = _head; pointer!.HasNext(); pointer = pointer.Next)
+            for (var pointer = Head; pointer!.HasNext(); pointer = pointer.Next)
             {
                 if (indexOfList < index)
                     array.SetValue(pointer.Data, indexOfArray);
@@ -156,11 +190,11 @@ namespace DataStructure
             return result;
         }
 
-        private (DataNode<T>?, int) FindNode(Predicate<DataNode<T>> match)
+        private (DoubleNode<T>?, int) FindNode(Predicate<DoubleNode<T>> match)
         {
             var indexOfList = 0;
 
-            for (var pointer = _head; pointer!.HasNext(); pointer = pointer.Next)
+            for (var pointer = Head; pointer!.HasNext(); pointer = pointer.Next)
             {
                 if (match.Invoke(pointer))
                     return (pointer, indexOfList++);
@@ -169,11 +203,11 @@ namespace DataStructure
             return (null, -1);
         }
 
-        private (DataNode<T>?, int) FindLastNode(Predicate<DataNode<T>> match)
+        private (DoubleNode<T>?, int) FindLastNode(Predicate<DoubleNode<T>> match)
         {
             var indexOfList = Count;
 
-            for (var pointer = _tail; pointer!.HasPrev(); pointer = pointer.Prev)
+            for (var pointer = Tail; pointer!.HasPrev(); pointer = pointer.Prev)
             {
                 if (match.Invoke(pointer))
                     return (pointer, --indexOfList);
@@ -181,6 +215,8 @@ namespace DataStructure
 
             return (null, -1);
         }
+
+
     }
 
 }
