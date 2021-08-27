@@ -1,5 +1,7 @@
-﻿using System;
+﻿using DataStructure.Models;
+using System;
 using System.Collections;
+using System.Collections.Generic;
 
 namespace DataStructure
 {
@@ -7,7 +9,7 @@ namespace DataStructure
     {
         public OneWayNode<T>? TopNode => _topNode;
         public int Count => _count;
-        private LinkedListNode<T>? _topNode;
+        private OneWayNode<T>? _topNode;
         private int _count;
         public bool IsSynchronized => throw new NotImplementedException();
 
@@ -16,7 +18,7 @@ namespace DataStructure
         public void Push(T data)
         {
             _count++;
-            _topNode = new LinkedListNode<T>(data, _topNode);
+            _topNode = new OneWayNode<T>(data, _topNode);
         }
 
         public T Pop()

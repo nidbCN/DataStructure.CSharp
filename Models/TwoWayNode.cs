@@ -6,7 +6,7 @@
         /// New a DataNode with value data.
         /// </summary>
         /// <param name="data">value</param>
-        public TwoWayNode(T data) : this(data, null) { }
+        public TwoWayNode(T? data) : this(data, null) { }
 
         /// <summary>
         /// New a DataNode with value data and previous node.
@@ -16,7 +16,7 @@
         /// </remarks>
         /// <param name="data">value</param>
         /// <param name="prev">previous node</param>
-        public TwoWayNode(T data, TwoWayNode<T>? prev = null, TwoWayNode<T>? next = null)
+        public TwoWayNode(T? data, TwoWayNode<T>? prev = null, TwoWayNode<T>? next = null)
         {
             Data = data;
 
@@ -33,7 +33,7 @@
             }
         }
 
-        public T Data { get; set; }
+        public T? Data { get; set; }
 
         public TwoWayNode<T>? Next { get; set; }
         public TwoWayNode<T>? Prev { get; set; }
