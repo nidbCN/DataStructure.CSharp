@@ -1,48 +1,44 @@
-﻿//using System;
-//using System.Collections;
+﻿using System;
+using System.Collections;
 
-//namespace DataStructure
-//{
-//    public class Stack<T> : ICollection, IEnumerable<T>
-//    {
-//        public LinkedListNode<T>? TopNode => _topNode;
+namespace DataStructure
+{
+    public class Stack<T> : ICollection, IEnumerable<T>
+    {
+        public LinkedListNode<T>? TopNode => _topNode;
+        public int Count => _count;
+        private LinkedListNode<T>? _topNode;
+        private int _count;
+        public bool IsSynchronized => throw new NotImplementedException();
 
-//        public int Count => _count;
+        public object SyncRoot => throw new NotImplementedException();
 
-//        private LinkedListNode<T>? _topNode;
-//        private int _count;
+        public void Push(T data)
+        {
+            _count++;
+            _topNode = new LinkedListNode<T>(data, _topNode);
+        }
 
-//        public bool IsSynchronized => throw new NotImplementedException();
+        public T Pop()
+        {
+            if (!_topNode.HasPrev()) throw new IndexOutOfRangeException();
 
-//        public object SyncRoot => throw new NotImplementedException();
+            _count--;
+            return (_topNode = _topNode.Prev).Data;
+        }
 
-//        public void Push(T data)
-//        {
-//            _count++;
-//            _topNode = new LinkedListNode<T>(data, _topNode);
-//        }
+        public IEnumerator<T> GetEnumerator()
+        {
+            throw new NotImplementedException();
+        }
 
-//        public T Pop()
-//        {
-//            if (!_topNode.HasPrev()) throw new IndexOutOfRangeException();
-
-//            _count--;
-//            return (_topNode = _topNode.Prev).Data;
-//        }
-
-//        public IEnumerator<T> GetEnumerator()
-//        {
-//            throw new NotImplementedException();
-//        }
-
-//        IEnumerator IEnumerable.GetEnumerator()
-//        {
-//            throw new NotImplementedException();
-//        }
-
-//        public void CopyTo(Array array, int index)
-//        {
-//            throw new NotImplementedException();
-//        }
-//    }
-//}
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            throw new NotImplementedException();
+        }
+        public void CopyTo(Array array, int index)
+        {
+            throw new NotImplementedException();
+        }
+    }
+}

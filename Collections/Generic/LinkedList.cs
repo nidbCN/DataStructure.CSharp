@@ -92,6 +92,8 @@ namespace DataStructure.Collections.Generic
         public DoubleNode<T>? Find(T? item)
             => Find(x => EqualityComparer<T>.Default.Equals(item, x));
 
+        public DoubleNode<T>? Find(T? item, EqualityComparer<T> comparer)
+            => Find(x => comparer.Equals(item, x));
 
         public DoubleNode<T>? Find(Predicate<T> match)
         {
@@ -212,7 +214,6 @@ namespace DataStructure.Collections.Generic
         }
         #endregion
 
-
         #region Private Methods
         private (DoubleNode<T>?, int) FindNode(Predicate<DoubleNode<T>> match)
         {
@@ -240,8 +241,6 @@ namespace DataStructure.Collections.Generic
             return (null, -1);
         }
         #endregion
-
-
     }
 
 }
