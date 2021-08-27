@@ -1,7 +1,7 @@
-﻿using DataStructure.Models;
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using DataStructure.Models;
 
 namespace DataStructure
 {
@@ -18,15 +18,20 @@ namespace DataStructure
         public void Push(T data)
         {
             _count++;
-            _topNode = new OneWayNode<T>(data, _topNode);
+            _topNode = new OneWayNode<T>(data, linkTo: _topNode);
         }
 
-        public T Pop()
+        public T? Pop()
         {
-            if (!_topNode.HasPrev()) throw new IndexOutOfRangeException();
+            if (_topNode is null) throw new IndexOutOfRangeException();
 
             _count--;
-            return (_topNode = _topNode.Prev).Data;
+
+            var data = _topNode.Data;
+
+            _topNode = _topNode.Adjacent;
+
+            return data;
         }
 
         public IEnumerator<T> GetEnumerator()

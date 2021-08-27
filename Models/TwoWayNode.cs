@@ -3,12 +3,6 @@
     public class TwoWayNode<T> : IDataNode<T>
     {
         /// <summary>
-        /// New a DataNode with value data.
-        /// </summary>
-        /// <param name="data">value</param>
-        public TwoWayNode(T? data) : this(data, null) { }
-
-        /// <summary>
         /// New a DataNode with value data and previous node.
         /// </summary>
         /// <remarks>
