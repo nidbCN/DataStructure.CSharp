@@ -5,7 +5,7 @@ namespace DataStructure
 {
     public class Stack<T> : ICollection, IEnumerable<T>
     {
-        public LinkedListNode<T>? TopNode => _topNode;
+        public OneWayNode<T>? TopNode => _topNode;
         public int Count => _count;
         private LinkedListNode<T>? _topNode;
         private int _count;
