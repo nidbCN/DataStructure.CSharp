@@ -7,19 +7,33 @@ namespace DataStructure
 {
     public class Stack<T> : ICollection, IEnumerable<T>
     {
+        /// <summary>
+        /// Top node of stack.
+        /// </summary>
         public OneWayNode<T>? TopNode => _topNode;
+
+        /// <summary>
+        /// Number of stack.
+        /// </summary>
         public int Count => _count;
+
+
         private OneWayNode<T>? _topNode;
+
+        private OneWayNode<T>? _bottomNode;
+
         private int _count;
         public bool IsSynchronized => throw new NotImplementedException();
 
         public object SyncRoot => throw new NotImplementedException();
+
 
         public void Push(T data)
         {
             _count++;
             _topNode = new OneWayNode<T>(data, linkTo: _topNode);
         }
+
 
         public T? Pop()
         {
@@ -45,7 +59,12 @@ namespace DataStructure
         }
         public void CopyTo(Array array, int index)
         {
-            throw new NotImplementedException();
+            var indexOfStack = 0;
+
+            for (var pointer = _bottomNode; pointer.HasAdjacent; pointer = pointer.Adjacent)
+            {
+
+            }
         }
     }
 }
