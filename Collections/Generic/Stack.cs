@@ -61,7 +61,7 @@ namespace DataStructure
         {
             var indexOfStack = 0;
 
-            for (var pointer = _bottomNode; pointer.HasAdjacent; pointer = pointer.Adjacent)
+            for (var pointer = _bottomNode; pointer.HasAdjacent(); pointer = pointer.Adjacent)
             {
 
             }

@@ -20,6 +20,6 @@
         public T? Data { get; set; }
 
         public OneWayNode<T>? Adjacent { get; set; }
-        public bool HasAdjacent => !(Adjacent is null);
+        public bool HasAdjacent() => !(Adjacent is null);
     }
 }
