@@ -59,11 +59,20 @@ namespace DataStructure
         }
         public void CopyTo(Array array, int index)
         {
+            if (_bottomNode is null) return;
+            if (array is null) throw new ArgumentNullException(nameof(array));
+            if (index < Count) throw new ArgumentOutOfRangeException();
+
             var indexOfStack = 0;
+            var indexOfArray = 0;
 
-            for (var pointer = _bottomNode; pointer.HasAdjacent(); pointer = pointer.Adjacent)
+            for (var pointer = _bottomNode; pointer!.HasAdjacent(); pointer = pointer.Adjacent)
             {
-
+                if (indexOfStack >= index)
+                {
+                    array.SetValue(pointer.Data, indexOfArray++);
+                    indexOfStack++;
+                }
             }
         }
     }

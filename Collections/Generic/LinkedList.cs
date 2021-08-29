@@ -82,8 +82,8 @@ namespace DataStructure.Collections.Generic
 
             for (var pointer = Head; pointer!.HasNext(); pointer = pointer.Next)
             {
-                if (indexOfList < arrayIndex)
-                    array[indexOfArray++] = pointer.Data;
+                if (indexOfList >= arrayIndex)
+                    array[indexOfArray++] = pointer!.Data;
 
                 indexOfList++;
             }
