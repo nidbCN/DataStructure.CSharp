@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DataStructure.Models
+﻿namespace DataStructure.Models
 {
     public class BinTreeNode<T> : IDataNode<T>
     {
@@ -13,8 +7,8 @@ namespace DataStructure.Models
         public BinTreeNode<T>? LeftChild { get; set; }
         public BinTreeNode<T>? RightChild { get; set; }
 
-        public bool HasLeftChild => !(LeftChild is null);
-        public bool HasRightChild => !(RightChild is null);
+        public bool HasLeftChild() => !(LeftChild is null);
+        public bool HasRightChild() => !(RightChild is null);
 
         public BinTreeNode()
         {
