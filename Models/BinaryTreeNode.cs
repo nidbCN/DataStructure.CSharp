@@ -1,21 +1,21 @@
 ﻿namespace DataStructure.Models
 {
-    public class BinTreeNode<T> : IDataNode<T>
+    public class BinaryTreeNode<T> : IDataNode<T>
     {
         public T? Data { get; set; }
 
-        public BinTreeNode<T>? LeftChild { get; set; }
-        public BinTreeNode<T>? RightChild { get; set; }
+        public BinaryTreeNode<T>? LeftChild { get; set; }
+        public BinaryTreeNode<T>? RightChild { get; set; }
 
         public bool HasLeftChild() => !(LeftChild is null);
         public bool HasRightChild() => !(RightChild is null);
 
-        public BinTreeNode()
+        public BinaryTreeNode()
         {
 
         }
 
-        public BinTreeNode(T? data, BinTreeNode<T>? leftChild = null, BinTreeNode<T>? rightChild = null)
+        public BinaryTreeNode(T? data, BinaryTreeNode<T>? leftChild = null, BinaryTreeNode<T>? rightChild = null)
         {
             Data = data;
             LeftChild = leftChild;

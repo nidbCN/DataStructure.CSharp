@@ -1,8 +1,8 @@
 ﻿namespace DataStructure.Models
 {
-    public class OneWayNode<T> : IDataNode<T>
+    public class OneWayListNode<T> : IDataNode<T>
     {
-        public OneWayNode(T? data, OneWayNode<T>? linkTo = null, OneWayNode<T>? linkFor = null)
+        public OneWayListNode(T? data, OneWayListNode<T>? linkTo = null, OneWayListNode<T>? linkFor = null)
         {
             Data = data;
 
@@ -19,7 +19,7 @@
 
         public T? Data { get; set; }
 
-        public OneWayNode<T>? Adjacent { get; set; }
+        public OneWayListNode<T>? Adjacent { get; set; }
         public bool HasAdjacent() => !(Adjacent is null);
     }
 }

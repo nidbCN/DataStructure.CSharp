@@ -16,18 +16,18 @@ namespace DataStructure.Collections.Generic
         /// <summary>
         /// The first node of LinkedList.
         /// </summary>
-        public TwoWayNode<T>? Head => _head;
+        public TwoWayListNode<T>? Head => _head;
 
         /// <summary>
         /// The last node of LinkedList.
         /// </summary>
-        public TwoWayNode<T>? Tail => _tail;
+        public TwoWayListNode<T>? Tail => _tail;
         #endregion
 
         #region Fields
         private int _count;
-        private TwoWayNode<T>? _head;
-        private TwoWayNode<T>? _tail;
+        private TwoWayListNode<T>? _head;
+        private TwoWayListNode<T>? _tail;
         #endregion
 
         #region Methods
@@ -90,13 +90,13 @@ namespace DataStructure.Collections.Generic
             }
         }
 
-        public TwoWayNode<T>? Find(T? item)
+        public TwoWayListNode<T>? Find(T? item)
             => Find(x => EqualityComparer<T>.Default.Equals(item, x));
 
-        public TwoWayNode<T>? Find(T? item, EqualityComparer<T> comparer)
+        public TwoWayListNode<T>? Find(T? item, EqualityComparer<T> comparer)
             => Find(x => comparer.Equals(item, x));
 
-        public TwoWayNode<T>? Find(Predicate<T> match)
+        public TwoWayListNode<T>? Find(Predicate<T> match)
         {
             if (match is null) throw new ArgumentNullException(nameof(match));
             if (_head is null) return default;
@@ -108,10 +108,10 @@ namespace DataStructure.Collections.Generic
             return result;
         }
 
-        public TwoWayNode<T>? FindLast(T? item)
+        public TwoWayListNode<T>? FindLast(T? item)
             => FindLast(x => EqualityComparer<T>.Default.Equals(item, x));
 
-        public TwoWayNode<T>? FindLast(Predicate<T> match)
+        public TwoWayListNode<T>? FindLast(Predicate<T> match)
         {
             if (match is null) throw new ArgumentNullException(nameof(match));
             if (_tail is null) return default;
@@ -131,7 +131,7 @@ namespace DataStructure.Collections.Generic
         public bool Remove(T? item)
             => Remove(Find(item));
 
-        public bool Remove(TwoWayNode<T>? node)
+        public bool Remove(TwoWayListNode<T>? node)
         {
             if (node is null) return false;
 
@@ -221,7 +221,7 @@ namespace DataStructure.Collections.Generic
         #endregion
 
         #region Private Methods
-        private (TwoWayNode<T>?, int) FindNode(Predicate<TwoWayNode<T>> match)
+        private (TwoWayListNode<T>?, int) FindNode(Predicate<TwoWayListNode<T>> match)
         {
             var indexOfList = 0;
 
@@ -234,7 +234,7 @@ namespace DataStructure.Collections.Generic
             return (null, -1);
         }
 
-        private (TwoWayNode<T>?, int) FindLastNode(Predicate<TwoWayNode<T>> match)
+        private (TwoWayListNode<T>?, int) FindLastNode(Predicate<TwoWayListNode<T>> match)
         {
             var indexOfList = Count;
 

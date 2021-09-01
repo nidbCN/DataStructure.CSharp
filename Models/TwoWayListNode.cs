@@ -1,6 +1,6 @@
 ﻿namespace DataStructure.Models
 {
-    public class TwoWayNode<T> : IDataNode<T>
+    public class TwoWayListNode<T> : IDataNode<T>
     {
         /// <summary>
         /// New a DataNode with value data and previous node.
@@ -10,7 +10,7 @@
         /// </remarks>
         /// <param name="data">value</param>
         /// <param name="prev">previous node</param>
-        public TwoWayNode(T? data, TwoWayNode<T>? prev = null, TwoWayNode<T>? next = null)
+        public TwoWayListNode(T? data, TwoWayListNode<T>? prev = null, TwoWayListNode<T>? next = null)
         {
             Data = data;
 
@@ -29,8 +29,8 @@
 
         public T? Data { get; set; }
 
-        public TwoWayNode<T>? Next { get; set; }
-        public TwoWayNode<T>? Prev { get; set; }
+        public TwoWayListNode<T>? Next { get; set; }
+        public TwoWayListNode<T>? Prev { get; set; }
         public bool HasNext() => !(Next is null);
         public bool HasPrev() => !(Prev is null);
 
