@@ -10,7 +10,7 @@ namespace DataStructure
         /// <summary>
         /// Top node of stack.
         /// </summary>
-        public OneWayNode<T>? TopNode => _topNode;
+        public OneWayListNode<T>? TopNode => _topNode;
 
         /// <summary>
         /// Number of stack.
@@ -18,9 +18,9 @@ namespace DataStructure
         public int Count => _count;
 
 
-        private OneWayNode<T>? _topNode;
+        private OneWayListNode<T>? _topNode;
 
-        private OneWayNode<T>? _bottomNode;
+        private OneWayListNode<T>? _bottomNode;
 
         private int _count;
         public bool IsSynchronized => throw new NotImplementedException();
@@ -31,7 +31,7 @@ namespace DataStructure
         public void Push(T data)
         {
             _count++;
-            _topNode = new OneWayNode<T>(data, linkTo: _topNode);
+            _bottomNode ??= _topNode = new OneWayListNode<T>(data, linkTo: _topNode);
         }
 
 
@@ -61,7 +61,7 @@ namespace DataStructure
         {
             if (_bottomNode is null) return;
             if (array is null) throw new ArgumentNullException(nameof(array));
-            if (index < Count) throw new ArgumentOutOfRangeException();
+            if (index < Count) throw new ArgumentOutOfRangeException(nameof(index));
 
             var indexOfStack = 0;
             var indexOfArray = 0;
