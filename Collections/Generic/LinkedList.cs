@@ -83,8 +83,9 @@ namespace DataStructure.Collections.Generic
             for (var pointer = Head; pointer!.HasNext(); pointer = pointer.Next)
             {
                 if (indexOfList >= arrayIndex)
+#nullable disable
                     array[indexOfArray++] = pointer!.Data;
-
+#nullable restore
                 indexOfList++;
             }
         }
@@ -100,7 +101,9 @@ namespace DataStructure.Collections.Generic
             if (match is null) throw new ArgumentNullException(nameof(match));
             if (_head is null) return default;
 
-            (var result, _) = FindNode(x => match(x.Data));
+#nullable disable
+            (var result, _) = FindNode(x => match(x!.Data));
+#nullable restore
 
             return result;
         }
@@ -113,7 +116,9 @@ namespace DataStructure.Collections.Generic
             if (match is null) throw new ArgumentNullException(nameof(match));
             if (_tail is null) return default;
 
-            (var result, _) = FindLastNode(x => match(x.Data));
+#nullable disable
+            (var result, _) = FindLastNode(x => match(x!.Data));
+#nullable restore
 
             return result;
         }
@@ -192,8 +197,9 @@ namespace DataStructure.Collections.Generic
 
             if (_head is null) return result;
 
-            (_, result) = FindNode(x => match.Invoke(x.Data));
-
+#nullable disable
+            (_, result) = FindNode(x => match.Invoke(x!.Data));
+#nullable restore
             return result;
         }
 
@@ -207,9 +213,9 @@ namespace DataStructure.Collections.Generic
             var result = -1;
 
             if (_tail is null) return result;
-
-            (_, result) = FindLastNode(x => match.Invoke(x.Data));
-
+#nullable disable
+            (_, result) = FindLastNode(x => match.Invoke(x!.Data));
+#nullable restore
             return result;
         }
         #endregion
